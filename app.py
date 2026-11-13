@@ -84,6 +84,10 @@ class App:
         self.worker: threading.Thread | None = None
         self.stop_flag = threading.Event()
         self.download_dir = default_download_dir()
+        try:
+            self.download_dir.mkdir(parents=True, exist_ok=True)
+        except OSError:
+            pass
         self.ffmpeg = find_ffmpeg()
 
         root.title("视频批量下载工具")
